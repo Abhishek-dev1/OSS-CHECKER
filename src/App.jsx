@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
-import { getAllCounts, contriSize } from './actions'
+import { getAllCounts} from './actions'
 var check = 0;
 
 function App() {
@@ -20,6 +20,7 @@ function App() {
     e.preventDefault();
     const arr = link.split("/")
     console.log(arr)
+    setPercentage(0);
     //setLink("");
 
     getAllCounts(arr[3], arr[4]).then((data) => {
@@ -46,12 +47,6 @@ function App() {
           check++;
         }
 
-        contriSize(data.contributors_url).then((value) => {
-          if (value.length >= 10) {
-            check++;
-          }
-        })
-
         if (check >= 3) {
           let percent = (check * 100) / 6;
           setPercentage(percent)
@@ -64,10 +59,13 @@ function App() {
         console.log(percentage)
 
         check = 0;
+        
 
 
       }
     })
+   
+    
 
   }
 
